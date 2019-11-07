@@ -15,7 +15,7 @@ class Post(db.Model):
     post_text = db.Column(db.String(1000))
 
 def retriveQuery(searchquery):
-    posts = Post.query.filter(Post.post_text.like('%' + searchquery + '%')).all()
+    posts = Post.query.filter(Post.post_text.ilike('%' + searchquery + '%')).all()
     return render_template('search.html', posts=posts)
 
 @app.route("/")
