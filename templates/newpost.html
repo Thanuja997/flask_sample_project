@@ -1,0 +1,45 @@
+{% extends 'index.html' %} {% block title %}Write a Post{% endblock %} {% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/newpost.css') }}">{% endblock %} {% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">All Posts</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/newpost">Write a Post</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-danger my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="container">
+
+    <form class="form-signin" method="POST" action="{{ url_for('newpost') }}">
+        <h2 class="form-signin-heading">Write a new Post</h2>
+        <div class="form-group">
+            <label for="inputName" class="sr-only">Name</label>
+            <input type="text" id="inputName" name="name" class="form-control" placeholder="Enter Your Name" required />
+        </div>
+        <div class="form-group">
+            <label for="post" class="sr-only">Post</label>
+            <textarea type="text" id="post" name="post" class="form-control" required
+                placeholder="Write Your Post"></textarea>
+
+        </div>
+        <button class="btn btn-danger" type="submit">Post</button>
+    </form>
+</div>
+
+{% endblock %}
