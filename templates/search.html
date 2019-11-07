@@ -1,4 +1,4 @@
-{% extends 'index.html' %} {% block title %}Home{% endblock %} {% block body %}
+{% extends 'index.html' %} {% block title %}Search Results{% endblock %} {% block body %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
 
@@ -11,13 +11,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">All Posts<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">All Posts</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/newpost">Write a Post</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
+            <form class="form-inline my-2 my-lg-0" >
                 <input class="form-control mr-sm-2" name="searchquery" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-danger my-2 my-sm-0" type="submit">Search</button>
             </form>
@@ -27,7 +27,7 @@
 
 <div class="container">
     <div class="jumbotron" style="background-color: white;">
-        <h1>All Posts</h1>
+        <h1>Search Results</h1>
     </div>
 
     {% for post in posts %}

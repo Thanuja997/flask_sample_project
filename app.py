@@ -14,14 +14,26 @@ class Post(db.Model):
     name = db.Column(db.String(30))
     post_text = db.Column(db.String(1000))
 
+def retriveQuery(searchquery):
+    posts = Post.query.filter(Post.post_text.like('%' + searchquery + '%')).all()
+    return render_template('search.html', posts=posts)
+
 @app.route("/")
 def home():
-    posts = Post.query.all()
-    return render_template('home.html', posts=posts)
+    searchquery = request.args.get('searchquery')
+    if searchquery:
+        return retriveQuery(searchquery)
+    else:
+        posts = Post.query.all()
+        return render_template('home.html', posts=posts)
 
 @app.route("/newpost")
 def newpost():
-    return render_template('newpost.html')
+    searchquery = request.args.get('searchquery')
+    if searchquery:
+        return retriveQuery(searchquery)
+    else:
+        return render_template('newpost.html')
 
 @app.route('/newpost', methods=['POST'])
 def newpostSubmit():
