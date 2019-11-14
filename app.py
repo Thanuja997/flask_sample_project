@@ -18,11 +18,18 @@ def retriveQuery(searchquery):
     posts = Post.query.filter(Post.post_text.ilike('%' + searchquery + '%')).all()
     return render_template('search.html', posts=posts)
 
+def editPage(editquery):
+    post = Post.query.get(editquery)
+    return render_template('edit.html', post=post)
+
 @app.route("/")
 def home():
     searchquery = request.args.get('searchquery')
+    editquery = request.args.get('edit')
     if searchquery:
         return retriveQuery(searchquery)
+    elif editquery:
+        return editPage(editquery)
     else:
         posts = Post.query.order_by(-Post.id).all()
         return render_template('home.html', posts=posts)
@@ -44,4 +51,18 @@ def newpostSubmit():
     db.session.add(new_post)
     db.session.commit()
     
+    return redirect(url_for('home'))
+
+
+@app.route('/', methods=['POST'])
+def updatePost():
+    id = request.form.get('id')
+    name = request.form.get('name')
+    post_text = request.form.get('post')
+    
+    new_post = Post.query.filter_by(id=id).first()
+    new_post.name = name
+    new_post.post_text = post_text
+    db.session.commit()
+
     return redirect(url_for('home'))
