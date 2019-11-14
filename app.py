@@ -24,7 +24,7 @@ def home():
     if searchquery:
         return retriveQuery(searchquery)
     else:
-        posts = Post.query.all()
+        posts = Post.query.order_by(-Post.id).all()
         return render_template('home.html', posts=posts)
 
 @app.route("/newpost")
